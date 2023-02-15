@@ -1,0 +1,201 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+    <!-- theme meta -->
+    <meta name="theme-name" content="revolve" />
+  
+    <!--Favicon-->
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+  
+    <!-- THEME CSS
+    ================================================== -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}">
+    <!-- Themify -->
+    <link rel="stylesheet" href="{% static 'plugins/themify/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/slick-carousel/slick-theme.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/slick-carousel/slick.css' %}">
+    <!-- Slick Carousel -->
+    <link rel="stylesheet" href="{% static 'plugins/owl-carousel/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/owl-carousel/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/magnific-popup/magnific-popup.css' %}">
+    <!-- manin stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css"
+      rel="stylesheet" />
+
+
+    <style>
+      .btn-primary {
+        background: #ce8460;
+        box-shadow: none;
+        }
+  
+        .btn-primary:hover {
+        background: #000;
+        color: #fff;
+        border-color: #000;
+        }
+        .btn-primary.focus{
+        background: #000;
+        color: #fff;
+        }
+  
+        .btn-dark {
+        color: #fff;
+        background:rgb(223, 133, 133) ;
+        }
+  
+        .btn-dark:hover,
+        .btn-white.btn-primary:hover {
+        background: #272d33;
+        color: #fff;
+        }
+  
+        .btn-grey {
+        background: #ce8460;
+        border-color: #ce8460;
+        color: #fff;
+        }
+  
+        .btn-grey:hover {
+        background: transparent;
+        border-color: #ce8460;
+        color: #000;
+        }
+        .btn-outline-primary{
+          color: #ce8460;
+          border-color: #ce8460;
+          box-shadow: none;
+        }
+        .btn-outline-primary:active{
+          background: #ce8460;
+          background-color: #ce8460;
+        }
+        .btn-outline-primary:hover{
+          background-color: #ce8460;
+          border-color: none;
+          color: #fff;
+        }
+        .search:hover,.search:focus{
+          border:#ce8460;
+        }
+              a {
+              transition: all 0.3s ease-in-out;
+              color: #000;
+              }
+  
+              a:link,
+              a:visited {
+              text-decoration: none;
+              }
+  
+              a:hover {
+              color: #ce8460;
+              }
+    </style>
+
+    <script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+  </script>
+    <script type="text/javascript">
+    (function(){
+    emailjs.init("9uX3p0bvEwLjnGV8-");
+    })();
+  </script>
+
+    <script>
+      function sendEmail() 
+        {
+            window.location = "mailto:{{userprofile.email}}";
+        }
+    </script>
+  </head>
+  <body>
+
+    {% include 'navbar.html' %}
+    {% block content%}
+    <div id="pre-loader">
+      <img src="{% static 'images/loader.gif' %}" alt="Loading..." />
+      </div>
+    {% endblock %}
+
+    <section class="footer-2 section-padding gray-bg pb-5">
+      <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-6">
+              <div class="copyright text-center ">
+                @ copyright all reserved to <a href="https://themefisher.com/">themefisher.com</a>-2019 Distribution <a
+                  href="https://themewagon.com">ThemeWagon.</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THEME JAVASCRIPT FILES
+    ================================================== -->
+    <!-- initialize jQuery Library -->
+    <script src="{% static 'plugins/jquery/jquery.js' %}"></script>
+    <!-- Bootstrap jQuery -->
+    <script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap/js/popper.min.js' %}"></script>
+    <!-- Owl caeousel -->
+    <script src="{% static 'plugins/owl-carousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'plugins/slick-carousel/slick.min.js' %}"></script>
+    <script src="{% static 'plugins/magnific-popup/magnific-popup.js' %}"></script>
+    <!-- Instagram Feed Js -->
+    <script src="{% static 'plugins/instafeed-js/instafeed.min.js' %}"></script>
+    <!-- main js -->
+    <script src="{% static 'js/custom.js' %}"></script>
+    <script src="{% static 'js/new.js' %}"></script>
+    <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.js"
+    ></script>
+    
+
+    <script>
+
+      (function ($) {
+        console.log('Hello Aheli')
+        // Start of use strict
+        // 'use strict';
+        
+          /*-----------------------------------------
+          1. Preloader Loading ----------------------- 
+          -----------------------------------------*/
+        function pre_loader(){
+          $("#load").fadeOut();
+          $('#pre-loader').delay(0).fadeOut('slow');
+        }
+        pre_loader();
+      })
+        /**
+   * Open and close the search form.
+   */
+        // const searchOpen = document.querySelector('.js-search-open');
+        // const searchClose = document.querySelector('.js-search-close');
+        // const searchWrap = document.querySelector(".js-search-form-wrap");
+
+        // searchOpen.addEventListener("click", (e) => {
+        //   e.preventDefault();
+        //   searchWrap.classList.add("active");
+        // });
+
+        // searchClose.addEventListener("click", (e) => {
+        //   e.preventDefault();
+        //   searchWrap.classList.remove("active");
+        // });
+    </script>
+
+  </body>
+</html>

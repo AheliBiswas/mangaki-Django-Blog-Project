@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="container p-5">
+    {% if page == 'update' %}
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="">Update your comment for blog "{{comment.blog}}"</label>
+        {{form.as_p}}
+        <div class="col">
+            <input type="submit" name="" id="" value="Update">
+        </div>
+    </form>
+    {% else %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="">Delete comment for blog "{{comment.blog}}"?</label>
+        {{form.as_p}}
+        <div class="col">
+            <input type="submit" name="" id="" value="Delete">
+        </div>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+<div class="col-lg-4">
+    <!-- Trending Post -->
+    <div class="sidebar-widget mb-5 container">
+        <h4 class="text-center widget-title trending-post">Trending Posts</h4>
+        {% for blog in trending_blogs %}
+        <div class="media border-bottom py-3 sidebar-post-item">
+            <a href="{% url 'read-blog' blog.id %}"><img class="mr-4" src="{{blog.blog_image.url}}" alt="" style="height: 100px; width: 100px;"></a>
+            <div class="media-body">
+                <span class="cat-name text-color font-sm font-extra text-uppercase letter-spacing">{{blog.blog_genre}}</span>
+                <h4><a href="{% url 'read-blog' blog.id %}">{{blog.title}}</a></h4>
+                <p class="author">by {{blog.creator}} </p>
+                <span><i class="ti-heart text-color"></i> {{blog.comment_set.count}} Comments</span>
+            </div>
+        </div>
+    {% endfor %}
+        <a class="cat-name text-color font-sm font-extra text-uppercase letter-spacing" href="{% url 'trending-blog' %}">More ></a>
+    </div>

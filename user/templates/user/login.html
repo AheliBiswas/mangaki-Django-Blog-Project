@@ -1,0 +1,84 @@
+{% extends 'login-register-main.html' %}
+
+{% block content %}
+
+<div class="main">
+{% load static %}
+  <!-- Sing in  Form -->
+  <section class="sign-in">
+              <div class="container">
+                  <div class="signin-content">
+                      <div class="signin-image">
+                          <figure><img src="{% static 'login-register-comps/images/signin-image.jpg' %}" alt="sing up image"></figure>
+                          <a href="{% url 'register' %}" class="signup-image-link">Create an account</a>
+                      </div>
+  
+                      <div class="signin-form">
+                          <h2 class="form-title">Sign In</h2>
+                          <form method="POST" class="register-form" id="login-form">
+                              {% csrf_token %}
+                              
+                              <div class="container pt-2">
+                                <div class="row justify-content-md-center">
+                                  <div class="col-md-auto">
+                                        <!-- Alert tags -->
+                                        {% if messages %}
+                                        {% for message in messages %}
+                                        <div class="alert {{message.tags}}" role="alert">
+                                          <button type="button" class="close pl-2" data-dismiss="alert" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                          </button>
+                                          {{ message }}
+                                        </div>
+                                        {% endfor %}
+                                      {% endif %}
+                                    </div>
+                                </div>
+                              </div>
+
+
+                              <div class="form-group">
+                                  <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                  <input type="text" name="username" id="your_name" placeholder="Your Username"/>
+                              </div>
+                              <div class="form-group">
+                                  <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
+                                  <input type="password" name="password" id="your_pass" placeholder="Password"/>
+                              </div>
+                              <div class="form-group form-button">
+                                  <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
+                              </div>
+
+                              <div class="form-group">
+                                <label for="remember-me" class="label-agree-term"><span><span></span></span>
+                                <a href="{% url 'user-check' %}" class="text-muted" >Forget Password?</a></label>
+                            </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+  </section>
+  
+</div>
+
+
+{% endblock %}
+
+
+
+<!-- <div class="container">
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="exampleInputEmail1">Username</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username" name="username">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  <p>Haven't registered yet? <a href="{% url 'register' %}">register</a></p>
+</div> -->

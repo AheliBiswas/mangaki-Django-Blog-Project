@@ -1,0 +1,61 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+	<div class="section-padding pl-4">
+		<div class="content">
+			<h3 class="">Blogs by<span class="text-color"> "{{userprofile.name}}"</span></h3>
+			<div class="row">
+				{% for blog in userblogs %}
+				<div class="col-lg-4 col-md-4 col-sm-6">
+					<article class="post-grid mb-5 ">
+						<a class="post-thumb mb-4 d-block" href="{% url 'read-blog' blog.id %}">
+							<img src="{{blog.blog_image.url}}" alt="" class="img-fluid w-100"
+							>
+						</a>
+
+						<div class="post-content-grid">
+							<div class="label-date">
+								<span class="day">{{blog.created|date:"d"}}</span>
+								<span class="month text-uppercase">{{blog.created|date:"M"}}</span>
+							</div>
+							<span class="cat-name text-color font-extra font-sm text-uppercase letter-spacing">{{blog.blog_genre}}</span>
+							<h3 class="post-title mt-1"><a href="blog-single.html">{{blog.title}}</a></h3>
+							{% for tag in blog.tag.all %}
+							<small class="border:1px grey">{{tag}},</small>
+						  {% endfor %}
+						  <div>
+							<a href="{% url 'read-blog' blog.id %}" class="btn btn-grey mt-3"> read more</a>
+						  </div>
+						</div>
+					</article>
+				</div>
+				{% empty %}
+				<p style="color: gray; text-align: center;">No recent blogs</p>
+				{% endfor %}
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="footer-home bg-grey py-4">
+		<div class="row">
+			<div class="col-lg-6 text-center text-lg-left">
+				© 2019 copyright Themes Themefisher Distribution <a href="https://themewagon.com">ThemeWagon.</a>
+			</div>
+			<div class="col-lg-6">
+				<ul class="list-inline text-center mb-0 text-lg-right">
+					<li class="list-inline-item"><a href="#">Privacy policy</a></li>
+					<li class="list-inline-item"><a href="#">Support</a></li>
+					<li class="list-inline-item"><a href="#">About</a></li>
+					<li class="list-inline-item"><a href="#">Contact</a></li>
+					<li class="list-inline-item"><a href="#">Terms</a></li>
+					<li class="list-inline-item"><a href="#">Category</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	</div>
+{% endblock %}

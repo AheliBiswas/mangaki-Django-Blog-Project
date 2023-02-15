@@ -1,0 +1,83 @@
+{% extends 'main.html' %}
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <h3>Welcome,{{request.user}}</h3>
+        <!-- request.user.profile.id(do not use this) -->
+        <a href="{% url 'user-profile' %}">
+            <button type="button" class="btn btn-secondary">Profile</button>
+        </a>
+    {% endif %}
+    <div class="home-container">
+        <div class="container">
+            <h2>Filter by tags</h2>
+            {% for tag in tags %}
+            <div>
+                <a href="{% url 'home' %}?search_item={{tag.name}}">{{tag}}</a>
+            </div>
+            {% endfor %}
+        </div>
+
+        
+        <div class="container">
+            <div>
+                <h2>Popular Blogs</h2>
+                <hr>
+                    {% for blog in blogs %}
+                        {% if blog.comment_set.count >= 5 %}
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{blog.blog_image.url}}" class="card-img-top" alt="image loading">
+                            <div class="card-body">
+                                <h3 class="card-title">{{blog.title}}</h3>
+                                <span style="color: royalblue;">{{blog.blog_genre}} </span>
+                                <span>@{{blog.creator}}    {{blog.created|timesince}}</span>
+                                <h6 class="card-text">{{blog.description}}</h6>
+                                {% for tag in blog.tag.all %}
+                                <span class="border:1px solid grey">{{tag}}</span>
+                                {% endfor %}
+                                <a href="{% url 'read-blog' blog.id %}" class="btn btn-dark">Read more</a>
+                                <hr>
+                                <p>Comments {{blog.comment_set.count}}</p>
+                            </div>
+                    </div>
+                        {% endif %}
+                    {% endfor %}
+            </div>
+
+            <h2>Blogs</h2>
+            <hr>
+            {% for blog in blogs %}
+            <div class="card" style="width: 18rem;">
+                <img src="{{blog.blog_image.url}}" class="card-img-top" alt="image loading">
+                    <div class="card-body">
+                        <h3 class="card-title">{{blog.title}}</h3>
+                        <span style="color: royalblue;">{{blog.blog_genre}} </span>
+                        <span>@{{blog.creator}}    {{blog.created|timesince}}</span>
+                        <h6 class="card-text">{{blog.description}}</h6>
+                        {% for tag in blog.tag.all %}
+                        <span class="border:1px solid grey">{{tag}}</span>
+                        {% endfor %}
+                        <a href="{% url 'read-blog' blog.id %}" class="btn btn-dark">Read more</a>
+                        <hr>
+                        <p>Comments {{blog.comment_set.count}}</p>
+                    </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="container">
+            {% include 'blogs/people_may_follow_sidebar.html' %}
+        </div>
+    </div>
+
+
+{% endblock %}
+
+<!-- 
+<div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div> -->

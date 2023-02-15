@@ -1,0 +1,119 @@
+{% extends 'main.html' %}
+{% block content %}
+    <div class="container">
+        <div>
+            <img src="{{blog.blog_image.url}}" class="card-img-top" alt="image loading" style="width:500px;height:600px;">
+            <h3>{{blog.title}}</h3>
+            <span style="color: royalblue;">{{blog.blog_genre}} </span>
+            <span>@{{blog.creator}}    {{blog.created|timesince}}</span>
+            <p>{{blog.description}}</p>
+            {% for tag in blog.tag.all %}
+            <span class="border:1px solid grey">{{tag}}</span>
+            {% endfor %}
+
+            {% if blog.creator == request.user %}
+            <a href="{% url 'update-blog' blog.id %}">
+                <button type="button" class="btn btn-primary">
+                    Update
+                </button>
+            </a>
+            <!-- Button trigger modal -->
+            <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+                Delete
+            </button>
+            
+              <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Delete Blog</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                    Are you sure about deleting blog "{{blog.title}}"?
+                    </div>
+                    <div class="modal-footer">
+                    <button type="submit" class="btn btn-secondary" data-dismiss="modal">
+                        Close
+                    </button>
+                    <a href="{% url 'delete-blog' blog.id %}">
+                        <button type="button" class="btn btn-primary">
+                            Delete
+                        </button>
+                    </a>
+                    </div>
+                </div>
+                </div>
+            </div>
+            {% endif %}
+
+            
+            <!-- Comment section -->
+            <div class="container">
+              {% for comment in comments %}
+                  <a href="">@{{comment.user}}</a>
+                  <span>{{comment.created|timesince}} ago</span>
+                  <p>{{comment.message}}</p>
+                  <!-- Button for message Update -->
+                  <a href="{% url 'update-comment' comment.id %}">
+                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">edit</button>
+                  </a>
+
+                  <!-- Button for Message Delete -->
+                  <a href="{% url 'delete-comment' comment.id %}">
+                    <button type="submit" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModalCenter">
+                      Delete
+                    </button>
+                  </a>
+
+                  <hr>
+              {% endfor %}
+            </div>
+
+              <form class="form-inline" action="" method="POST">
+                {% csrf_token %}
+                <div class="form-group mx-sm-3 mb-2">
+                  <input type="text" name="comment" class="form-control" placeholder="Write your reviews here">
+                </div>
+                
+                <button type="submit" class="btn btn-primary mb-2">Add</button>
+              </form>
+
+            </div>
+            
+            <!-- <a href="{% url 'delete-blog' blog.id %}" class="btn btn-danger">Delete</a> -->
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">{}
+    Launch demo modal
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,161 @@
+<!-- <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+
+ 
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="navbar-brand" href="{% url 'home' %}">Navbar</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'create-blog' %}">Create Blog</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Genre
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'anime-blog' %}">Anime</a>
+          <a class="dropdown-item" href="{% url 'manga-blog' %}">Manga</a>
+          <a class="dropdown-item" href="{% url 'webtoon-blog' %}">Webtoon</a>
+          <a class="dropdown-item" href="{% url 'manhwa-blog' %}">Manhwa</a>
+          <a class="dropdown-item" href="{% url 'manhua-blog' %}">Manhua</a>
+      </li>
+      <li class="nav-item">
+        {% if request.user.is_authenticated %}
+        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        {% else %}
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
+        {% endif %}
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" method="GET" action="">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search_item" value="{{search_item}}">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </nav> -->
+
+  {% load static %}
+	<header class="header-top bg-grey justify-content-center">
+		<div class="container">
+			<div class="pl-4 row align-items-center">
+				<div class="col-lg-2 header-left col-md-4 col-7">
+					<ul class="list-inline header-socials-2 mb-0 text-center">
+                        <a class="navbar-brand " href="{% url 'home' %}">
+                            <img src="{% static 'images/5.png' %}" alt="" class="img-fluid">
+                        </a>
+							<div class="search_toggle mobile-search d-md-block d-lg-none"><i class="ti-search"></i></div>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-lg-8 text-center col-md-8 col-5">
+					<nav class="p-2 navbar-expand-lg navigation">
+						<div class="collapse navbar-collapse mr-xl-5" id="navbarContent">
+							<ul id="menu" class="menu navbar-nav mx-auto">
+								<li class="nav-item">
+									<a  href="{% url 'home' %}" class="nav-link">
+										Home
+									</a>
+								</li>
+								<li lass="nav-item">
+									<a class="nav-link" href="{% url 'create-blog' %}">
+										Create Blog
+									</a>
+								</li>
+
+								<li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown"
+										aria-haspopup="true" aria-expanded="false">
+										Genre
+									</a>
+									<div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                    <a class="dropdown-item" href="{% url 'anime-blog' %}">Anime</a>
+                    <a class="dropdown-item" href="{% url 'manga-blog' %}">Manga</a>
+                    <a class="dropdown-item" href="{% url 'webtoon-blog' %}">Webtoon</a>
+                    <a class="dropdown-item" href="{% url 'manhwa-blog' %}">Manhwa</a>
+                    <a class="dropdown-item" href="{% url 'manhua-blog' %}">Manhua</a>
+									</div>
+								</li>
+								<li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+
+							</ul>
+						</div>
+					</nav>
+				</div>
+
+				<div class="col-lg-2 pr-4">
+          <div class="row">
+            <!-- Search -->
+            <div class="col-md-4">
+              <div class="text-right search">
+                <div class="search_toggle d-none d-lg-block pt-3 pr-3"><i class="ti-search"></i></div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              {% if request.user.is_authenticated %}
+              <div class="dropdown">
+                <a
+                  class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                  href="#"
+                  id="navbarDropdownMenuAvatar"
+                  role="button"
+                  data-mdb-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <img
+                    src="{{request.user.profile.profile_image.url}}"
+                    class="rounded-circle"
+                    height="50"
+                    alt="Black and White Portrait of a Man"
+                    loading="lazy"
+                  />
+                </a>
+                <ul
+                  class="dropdown-menu dropdown-menu-end"
+                  aria-labelledby="navbarDropdownMenuAvatar"
+                >
+                  <li>
+                    <a class="dropdown-item" href="{% url 'user-profile' %}">My profile</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'settings' request.user.profile.id %}">Settings</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                  </li>
+                </ul>
+              </div>
+              {% else %}
+              <a href="{% url 'login' %}" class="btn btn-primary">Login/Register</a>
+              {% endif %}
+            </div>
+          </div>
+          <!--search overlay start-->
+          <div class="search-wrap">
+            <div class="overlay">
+                <form action="#" method="GET" class="search-form">
+                  {% csrf_token %}
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-10 col-9">
+                                <input type="text" class="form-control" placeholder="Search..." name="search_item" value="{{search_item}}" />
+                            </div>
+                            <div class="col-md-2 col-3 text-right">
+                                <div class="search_toggle toggle-wrap d-inline-block">
+                                    <i class="ti-close"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--search overlay end-->
+				</div>
+			</div>
+		</div>
+	</header>

@@ -1,0 +1,20 @@
+<div class="sidebar-widget mb-5 container">
+    <h4 class="text-center widget-title trending-post">People you may follow</h4>
+    {% for profile in profiles|slice:":5" %}
+    <div class="post-author d-flex  pl-lg-5 p-2">
+            <div class="author-img pl-md-5">
+                <a href="{% url 'user-account' profile.id %}">
+                <img alt="" src="{{profile.profile_image.url}}" class="avatar avatar-100 photo rounded-circle" width="65"
+                    height="65">
+                </a>
+            </div>
+
+            <div class="author-content pl-4">
+                <h4 class="mb-1"><a href="{% url 'user-account' profile.id %}" title="" rel="author" class="text-capitalize">{{profile.name}}</a>
+                </h4>
+                <p class="font-italic text-muted mb-2">@{{profile.username}}</p>
+            </div>
+    </div>
+    {% endfor %}
+        <a class="cat-name text-color font-sm font-extra text-uppercase letter-spacing p-lg-5" href="{% url 'users' %}">More ></a>
+</div>

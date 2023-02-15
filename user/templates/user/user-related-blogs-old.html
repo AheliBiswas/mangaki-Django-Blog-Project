@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div>
+    <h2>Blogs by "{{userprofile.name}}"</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="grid-container">
+            <!-- the card and content creates from here -->
+            {% for blog in userblogs %}
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{blog.blog_image.url}}" class="card-img-top" alt="image loading">
+                        <div class="card-body">
+                            <h3 class="card-title">{{blog.title}}</h3>
+                            <span style="color: royalblue;">{{blog.blog_genre}} </span>
+                            <span>@{{blog.creator}}    {{blog.created|timesince}}</span>
+                            <h6 class="card-text">{{blog.description}}</h6>
+                            {% for tag in blog.tag.all %}
+                            <span class="border:1px solid grey">{{tag}}</span>
+                            {% endfor %}
+                            <a href="{% url 'read-blog' blog.id %}" class="btn btn-dark">Read more</a>
+                            <hr>
+                        </div>
+                </div>
+                </div>
+            <!-- ends here -->
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

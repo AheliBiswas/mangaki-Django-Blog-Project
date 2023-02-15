@@ -1,0 +1,372 @@
+{% extends 'main.html' %}
+{% block content %}
+
+    <section class="single-block-wrapper section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+
+                    <div class="container pt-2">
+                        <div class="row justify-content-md-center">
+                          <div class="col-md-auto">
+                                <!-- Alert tags -->
+                                {% if messages %}
+                                {% for message in messages %}
+                                <div class="alert {{message.tags}}" role="alert">
+                                  <button type="button" class="close pl-2" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                  </button>
+                                  {{ message }}
+                                </div>
+                                {% endfor %}
+                              {% endif %}
+                            </div>
+                        </div>
+                      </div>
+                      
+                    <!-- Read Post -->
+                    <div class="single-post">
+                        <div class="post-header mb-5 text-center">
+                            <div class="meta-cat">
+                                <a class="post-category font-extra text-color text-uppercase font-sm letter-spacing-1"
+                                    href="#">{{blog.blog_genre}}</a>
+                            </div>
+                            <h2 class="post-title mt-2">
+                                {{blog.title}}
+                            </h2>
+
+                            <div class="post-meta">
+                                <span class="text-uppercase font-sm letter-spacing-1 mr-3">by @{{blog.creator.profile.username}}</span>
+                                <span class="text-uppercase font-sm letter-spacing-1">{{blog.created|date:"F m, Y"}}</span>
+                            </div>
+                            <div class="row">
+                                {% if blog.creator == request.user %}
+                                <div class="col-6 pl-5 align-content-center">
+                                    <a href="{% url 'update-blog' blog.id %}">
+                                        <button type="button" class="btn btn-info">
+                                            Update
+                                        </button>
+                                    </a>
+                                </div>
+
+                                <div class="col-6 pr-5 align-content-center">
+                                <!-- Button trigger modal -->
+                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+                                    Delete
+                                </button>
+                                </div>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalCenterTitle">Delete Blog</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                        <div class="modal-body">
+                                        Are you sure about deleting blog "{{blog.title}}"?
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="submit" class="btn btn-secondary" data-dismiss="modal">
+                                            Close
+                                        </button>
+                                        <a href="{% url 'delete-blog' blog.id %}">
+                                            <button type="button" class="btn btn-danger">
+                                                Delete
+                                            </button>
+                                        </a>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+
+                            </div>
+                            <div class="post-featured-image mt-5">
+                                <img src="{{blog.blog_image.url}}" class="img-fluid w-100" alt="featured-image">
+                            </div>
+                        </div>
+                        <div class="post-body">
+                            <div class="entry-content">
+                                <p> {{blog.description|safe}}</p>
+                                <h2 class="mt-4 mb-3">Perfect design & code delivered to you</h2>
+                                <p> The Sagoths had begun to take notice of his habit of declaiming throughout entire
+                                    marches. One of them asked him what he was saying—to whom he was talking. The
+                                    question gave me an idea, so I answered quickly before Perry could say anything.</p>
+                                <blockquote>
+                                    <i class="ti-quote-left mr-2"></i>A wise girls knows her limit to touch the
+                                    sky.Repellat sapiente neque iusto praesentium adipisci.The question gave me an idea,
+                                    so I answered quickly before Perry could say anything.<i
+                                        class="ti-quote-right ml-2"></i>
+                                </blockquote>
+
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <img src="images/fashion/single-img1.png" alt="post-ads"
+                                            class="img-fluid mr-4 w-100">
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <img src="images/fashion/single-img2.png" alt="post-ads"
+                                            class="img-fluid mr-4 w-100">
+                                    </div>
+                                </div>
+                                <h3 class="mt-5 mb-3">Enjoying the view of summer</h3>
+
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde cum delectus
+                                    exercitationem
+                                    natus quidem enim error suscipit. Iure cupiditate nobis quaerat consectetur! Vero
+                                    aliquam,
+                                    amet ipsum ullam reiciendis nostrum voluptate accusantium provident ut blanditiis
+                                    incidunt. </p>
+
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ab ratione animi
+                                    nobis in et consequatur
+                                    earum modi repellendus, qui, non debitis pariatur tempora consequuntur!</p>
+                            </div>
+
+                            <!-- Tags -->
+                            <div class="post-tags pb-2">
+                                {% for tag in blog.tag.all %}
+                                <a href="{% url 'home' %}?search_item={{tag.name}}" class=" p-2"><span class="btn-dark btn-sm p">#{{tag}}</span></a>
+                                {% endfor %}
+                            </div>
+                            <!-- Comment count -->
+                            <div
+                                class="tags-share-box center-box d-flex text-center justify-content-between border-top border-bottom py-3">
+
+                                <span class="single-comment-o"><i class="fa fa-comment-o"></i>{{blog.comment_set.count}} comment</span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of Read Post -->
+
+
+                    <!-- Comments -->
+                    <div class="comment-area my-5">
+                        {% for comment in comments %}
+                        <div class="comment-area-box media mt-3">
+                            <img alt="" src="{{comment.user.profile.profile_image.url}}" class="img-fluid float-left mr-3 rounded-circle" style="height: 65px; width: 65px;">
+
+                            <div class="media-body ml-4">
+                                <div class="row">
+                                    
+                                    <div class="col-md-2 pr-lg-5">
+                                    <!-- Button for message Update -->
+                                    <h4 class="mb-0"><a href="{% url 'user-account' comment.user.profile.id %}">@{{comment.user}}</a></h4>
+                                    </div>
+
+                                    {% if request.user.is_authenticated %}
+                                    <div class="col-md-2 pr-5">
+                                        <!-- Button for Message Delete -->
+                                        <div class="dropdown">
+                                            <button
+                                              type="button"
+                                              id="dropdownMenuButton"
+                                              data-mdb-toggle="dropdown"
+                                              aria-expanded="false"
+                                              style="border: none;
+                                              background-color: white;"
+                                            >
+                                            &#10247;
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            {% if comment.user == request.user %}
+                                              <li><a href="{% url 'update-comment' comment.id %}" class="dropdown-item" style="color: #332D2D; text-decoration: none;">
+                                                Edit
+                                                </a></li>
+                                              <li><a href="{% url 'delete-comment' comment.id %}" class="dropdown-item" style="color:#DC4C64; text-decoration: none;">
+                                                Delete
+                                                </a></li>
+                                                {% else %}
+                                              <li><a href="{% url 'delete-comment' comment.id %}" class="dropdown-item" style="color:#DC4C64; text-decoration: none;">
+                                                Delete
+                                                </a></li>
+                                            {% endif %}
+                                            </ul>
+                                          </div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <span class="date-comm font-sm text-capitalize text-color"><i
+                                        class="ti-time mr-2"></i>{{comment.created|timesince}}</span>
+
+                                <div class="comment-content mt-1">
+                                    <p>{{comment.message}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!-- End of comments -->
+
+                    {% if request.user.is_authenticated %}
+                    <!-- Comment entry section -->
+                    <form class="comment-form mb-5 gray-bg p-5" id="comment-form" method="POST">
+                        {% csrf_token %}
+                        <h3 class="text-center">Leave a comment</h3>
+                        <p class="font-italic mb-4 text-center" style="color: #C8C8C8;">It helps the creators! :)</p>
+                        <div class="row">  
+                            <div class="col-lg-12">
+                                <textarea class="form-control mb-3" name="comment" id="comment" cols="30" rows="5"
+                                    placeholder="Comment"></textarea>
+                            </div>
+                        </div>
+
+                        <input class="btn btn-primary" type="submit" name="submit-contact" id="submit_contact"
+                            value="Submit Message">
+                    </form>
+                    <!-- Comment entry section -->
+                    {% endif %}
+
+                    <!-- Next and previous post suggestions -->
+                    <!-- <nav class="post-pagination clearfix border-top border-bottom py-4">
+                        <div class="prev-post">
+                            <a href="blog-single.html">
+                                <span class="text-uppercase font-sm letter-spacing">Next</span>
+                                <h4 class="mt-3"> Intel’s new smart glasses actually look good</h4>
+                            </a>
+                        </div>
+                        <div class="next-post">
+                            <a href="blog-single.html">
+                                <span class="text-uppercase font-sm letter-spacing">Previous</span>
+                                <h4 class="mt-3">Free Two-Hour Delivery From Whole Foods</h4>
+                            </a>
+                        </div>
+                    </nav> -->
+                    <!-- Next and previous post suggestions -->
+
+                    <!-- You may also like section -->
+                    <!-- <div class="related-posts-block mt-5">
+                        <h3 class="news-title mb-4 text-center">
+                            You May Also Like
+                        </h3>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="post-block-wrapper mb-4 mb-lg-0">
+                                    <a href="blog-single.html">
+                                        <img class="img-fluid" src="images/fashion/img-1.jpg" alt="post-thumbnail" />
+                                    </a>
+                                    <div class="post-content mt-3">
+                                        <h5>
+                                            <a href="blog-single.html">Intel’s new smart glasses actually look good</a>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="post-block-wrapper mb-4 mb-lg-0">
+                                    <a href="blog-single.html">
+                                        <img class="img-fluid" src="images/fashion/img-2.jpg" alt="post-thumbnail" />
+                                    </a>
+                                    <div class="post-content mt-3">
+                                        <h5>
+                                            <a href="blog-single.html">Free Two-Hour Delivery From Whole Foods</a>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="post-block-wrapper">
+                                    <a href="blog-single.html">
+                                        <img class="img-fluid" src="images/fashion/img-3.jpg" alt="post-thumbnail" />
+                                    </a>
+                                    <div class="post-content mt-3">
+                                        <h5>
+                                            <a href="blog-single.html">Snow and Freezing Rain in Paris Forces the</a>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- End of You may also like section -->
+
+                </div>
+                <!-- User Account -->
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="sidebar sidebar-right">
+                        <div class="sidebar-wrap mt-5 mt-lg-0">
+                            <div class="sidebar-widget about mb-5 text-center p-3">
+                                <div class="about-author">
+                                    <img src="{{userprofile.profile_image.url}}" alt="" class="img-fluid">
+                                </div>
+                                <h4 class="mb-0 mt-4">{{userprofile.name}}</h4>
+                                <p class="font-italic text-muted">@{{userprofile.username}}</p>
+                                <p>{{userprofile.bio}}</p>
+                                <!-- <img src="images/liammason.png" alt="" class="img-fluid"> -->
+                                <div class="d-flex justify-content-center mb-2">
+                                    {% if request.user.is_authenticated %}
+                                    <a href="{% url 'user-account' userprofile.id %}"  style="color: none">
+                                        <button type="button" class="btn btn-primary ms-1">Profile</button>
+                                        </a>
+  
+                                    <a href="" class="pl-4">
+                                        <button type="submit" class="btn btn-outline-primary" style="border-color: #ce8460;" onclick="sendEmail();">Email Me</button>
+                                      </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            {% if request.user.is_authenticated %}
+                            <div class="sidebar-widget follow mb-5 text-center">
+                                <h4 class="text-center widget-title">Find Me On</h4>
+                                <div class="follow-socials">
+                                    <a href="{{userprofile.social_twitter}}"><i class="ti-twitter"></i></a>
+                                    <a href="{{userprofile.social_instagram}}"><i class="ti-instagram"></i></a>
+                                    <a href="{{userprofile.social_youtube}}"><i class="ti-youtube"></i></a>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <!-- Trending Posts -->
+                            <div class="sidebar-widget mb-5 ">
+                                <h4 class="text-center widget-title">Trending Posts</h4>
+                                {% for blog in trending_blogs %}
+                                <div class="media border-bottom py-3 sidebar-post-item">
+                                    <a href="{% url 'read-blog' blog.id %}"><img class="mr-4" src="{{blog.blog_image.url}}" alt="" style="height: 100px; width: 100px;"></a>
+                                    <div class="media-body">
+                                        <span class="cat-name text-color font-sm font-extra text-uppercase letter-spacing">{{blog.blog_genre}}</span>
+                                        <h4><a href="{% url 'read-blog' blog.id %}">{{blog.title}}</a></h4>
+                                        <p class="author">by {{blog.creator}} </p>
+                                        <span><i class="ti-heart text-color"></i> {{blog.comment_set.count}} Comments</span>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <!-- End of Trending Posts -->
+
+                            <!-- Popular Tags -->
+                            <div class="sidebar-widget category mb-5">
+                                <h4 class="text-center widget-title">Tags</h4>
+                                <ul class="list-unstyled">
+                                    {% for tag in tags %}
+                                    <li class="align-items-center d-flex justify-content-between">
+                                        <a href="{% url 'home' %}?search_item={{tag.name}}">{{tag}}</a>
+                                        <span>{{tag.blog_set.count}}</span>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <!-- End of Popular Tags -->
+                            
+                            <div class="sidebar-widget subscribe mb-5">
+                                <h4 class="text-center widget-title">Newsletter</h4>
+                                <input type="text" class="form-control" placeholder="Email Address">
+                                <a href="#" class="btn btn-primary d-block mt-3">Sign Up</a>
+                            </div>
+
+                            <div class="sidebar-widget sidebar-adv mb-5">
+                                <a href="#"><img src="images/sidebar-banner3.png" alt="" class="img-fluid w-100"></a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- End of User Account -->
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,119 @@
+{% extends 'main.html' %}
+{% block content %}
+<section class="section-padding">
+    <div class="row">
+        <div class="col-3" >
+          <!-- Tab navs -->
+          <div
+            class="nav flex-column nav-pills text-center"
+            id="v-pills-tab"
+            role="tablist"
+            aria-orientation="vertical"
+          >
+            <a
+              class="nav-link active text-color"
+              id="v-pills-link1-tab"
+              data-mdb-toggle="pill"
+              href="#v-pills-link1"
+              role="tab"
+              aria-controls="v-pills-link1"
+              aria-selected="true"
+              >Blog Instructions</a
+            >
+            <a
+              class="nav-link"
+              id="v-pills-link2-tab"
+              data-mdb-toggle="pill"
+              href="#v-pills-link2"
+              role="tab"
+              aria-controls="v-pills-link2"
+              aria-selected="false"
+              >Update Profile</a
+            >
+            <a
+              class="nav-link"
+              id="v-pills-link3-tab"
+              data-mdb-toggle="pill"
+              href="#v-pills-link3"
+              role="tab"
+              aria-controls="v-pills-link3"
+              aria-selected="false"
+              >Delete Profile</a
+            >
+            <a
+              class="nav-link"
+              id="v-pills-link4-tab"
+              data-mdb-toggle="pill"
+              href="#v-pills-link4"
+              role="tab"
+              aria-controls="v-pills-link4"
+              aria-selected="false"
+              >Suggest An Update</a
+            >
+          </div>
+          <!-- Tab navs -->
+        </div>
+      
+        <div class="col-9">
+          <!-- Tab content -->
+          <div class="tab-content" id="v-pills-tabContent">
+            <div
+              class="tab-pane fade show active"
+              id="v-pills-link1"
+              role="tabpanel"
+              aria-labelledby="v-pills-link1-tab"
+            >
+            <span class="text-sm text-muted pb-3">(We request you to follow these instructions as it will make your blog and profile visually appealing! :)</span>
+                <ul class="pt-2">
+                    <li class="pb-2"><h6 class="text-uppercase text-color">Thumbnail Image:</h6> Thumbnail image size should be *(696 x 1228). Thumbnail image will be on top carsoul after hitting a surtain
+                        popularity.</li>
+                    <li class="pb-2"><h6 class="text-uppercase text-color">Blog Image:</h6> Blog image size should be *(1200 x 675). Blog image will be your main image for your blog which will be on top of
+                        the blog and on the home page section.</li>
+                    <li class="pb-2"><h6 class="text-uppercase text-color">Profile Image:</h6> Profile image size shoul be *(1080 x 1064). Profile image will shrink for the images above this ratio.</li>
+                </ul>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="v-pills-link2"
+              role="tabpanel"
+              aria-labelledby="v-pills-link2-tab"
+            >
+            Update your profile here.
+
+            {% if request.user.is_authenticated %}
+            <div class="pt-4">
+              <a href="{% url 'update-profile' %}">
+                <button type="button" class="btn btn-grey btn-sm mr-1" style="border-radius: 12px; border-width: 3px; padding: 10px 24px;">Update</button>
+              </a>
+            </div>
+            {% endif %}
+            </div>
+            <div
+              class="tab-pane fade"
+              id="v-pills-link3"
+              role="tabpanel"
+              aria-labelledby="v-pills-link3-tab"
+            >
+            <h6 class="text-uppercase text-color pb-2">Are you sure about deleting your profile?</h6>
+            <span class="text-danger text-sm pt-2">**If you press 'Delete' option then all your data will be delete!</span>
+            <div class="col-md-2 pt-3">
+                <a href="{% url 'delete-profile' userprofile.id %}"></a>
+                  <button type="submit" class="btn btn-grey btn-sm"              
+                  style="border-radius: 12px; border-width: 3px; padding: 10px 24px;">Delete</button>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="v-pills-link4"
+              role="tabpanel"
+              aria-labelledby="v-pills-link4-tab"
+            >
+            <h6 class="text-uppercase text-color pb-2">Email the Dev's at this adrress:</h6>
+            Email: moon@gmail.com
+            </div>
+          </div>
+          <!-- Tab content -->
+        </div>
+      </div>
+</section>
+{% endblock %}

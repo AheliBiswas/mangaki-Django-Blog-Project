@@ -1,0 +1,29 @@
+{% load static %}
+
+<section class="slider mt-4">
+    <div class="container-fluid">
+        <div class="row no-gutters">
+            <div class="col-lg-12 col-sm-12 col-md-12 slider-wrap">
+                {% for blog in topslider_blogs %}
+                <!-- Each component -->
+                <div class="slider-item">
+                    <div class="slider-item-content">
+                        <div class="post-thumb mb-4">
+                            <a href="{% url 'read-blog' blog.id %}">
+                                <img src="{{blog.blog_thumbnail.url}}" alt="" class="img-fluid w-100">
+                            </a>
+                        </div>
+
+                        <div class="slider-post-content">
+                            <span class="cat-name text-color font-sm font-extra text-uppercase letter-spacing">{{blog.blog_genre}}</span>
+                            <h3 class="post-title mt-1"><a href="{% url 'read-blog' blog.id %}">{{blog.title}}</a></h3>
+                            <span class=" text-muted  text-capitalize">{{blog.created|date:"F m, Y"}}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- End of component -->
+            </div>
+        </div>
+    </div>
+</section>

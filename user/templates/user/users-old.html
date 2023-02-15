@@ -1,0 +1,68 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div>
+    <form class="form-inline my-2 my-lg-0" method="GET" action="">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search by username" aria-label="Search" name="search_user" value="{{search_user}}">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+</div>
+<div class="users-container">
+    <div class="container">
+        <h2>Following:</h2>
+        {% for profile in followings %}
+        <div class="user-container pb-3">
+            <div>
+                <img class="rounded-circle shadow-4-strong" alt="avatar2" src="{{profile.profile_image.url}}" style="width: 50px; height: auto;"/>
+            </div>
+            
+            <div>
+                <h6><a href="{% url 'user-account' profile.id %}">{{profile.name}}</a></h6>
+                <span class="pb-2">{{profile.username}}</span>
+            </div>
+          </div>
+        {% endfor %}
+    </div>
+    <div>
+        <h2>People you may follow</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="grid-container">
+                <!-- the card and content creates from here -->
+                {% for profile in profiles %}
+                <div class="col">
+                    <div class="card" style="width: 18rem; border-radius: 15px;">
+                        <div class="card-body">
+                            <div class="user-container">
+                                <div>
+                                    <img class="rounded-circle shadow-4-strong" alt="avatar2" src="{{profile.profile_image.url}}" style="width: 80px; height: fit-content;"/>
+                                </div>
+                                <div>
+                                    <h6><a href="{% url 'user-account' profile.id %}">{{profile.name}}</a></h6>
+                                    <p class="font-italic mb-1">@{{profile.username}}</p>
+                                    <div class="d-flex pt-2"></div>
+                                    <div class="d-flex pt-1">
+                                        <a href="{% url 'user-account' profile.id %}">
+                                            <button type="button" class="btn btn-outline-primary btn-sm me-1 flex-grow-1">Profile</button>
+                                        </a>
+    
+                                        <form action="{% url 'follow-unfollow' %}" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="pk" value="{{profile.id}}">
+                                            <button type="submit" class="btn btn-primary btn-sm">Follow</button> 
+                                        </form> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                <!-- ends here -->
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

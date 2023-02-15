@@ -1,0 +1,77 @@
+{% extends 'main.html' %}
+{% block content %}
+
+	<div class="row justify-content-center">
+		<div class="ml-lg-5 ml-md-5 col-lg-10">
+			<div class="wrapper img" style="background-image: url(images/img.jpg);">
+				<div class="row  ml-lg-5">
+					<div class="ml-lg-5 row-4 col-md-9">
+						<div class="contact-wrap w-100 p-md-5 p-4">
+							<h3 class="mb-4" style="color: #ce8460;">Create or Update Blog:</h3>
+							<!-- form start -->
+							<form method="POST" action="" enctype="multipart/form-data">
+                                {% csrf_token %}
+								<div class="row">
+									{{form.as_p}}
+									{{form.media}}
+									<!-- <div class="ml-lg-5 col-md-12">
+										<div class="form-group">
+											<label class="label" for="name">Title</label>
+											<input type="text" class="form-control" name="name" id="name" placeholder="Enter blog title">
+										</div>
+									</div>
+									<div class="ml-lg-5 col-md-12">
+										<div class="input-group mb-3 mt-3">
+											<div class="input-group-prepend">
+											  <label class="input-group-text" for="inputGroupSelect01">Genre</label>
+											</div>
+											<select class="custom-select" id="inputGroupSelect01">
+											  <option selected>Choose...</option>
+											  <option value="1">One</option>
+											  <option value="2">Two</option>
+											  <option value="3">Three</option>
+											</select>
+										</div>
+									</div>
+									<div class="ml-lg-5 col-md-12">
+										<div class="input-group mb-3 mt-3">
+											<div class="input-group-prepend">
+											  <label class="input-group-text" for="inputGroupSelect01">Tags</label>
+											</div>
+											<select class="custom-select" id="inputGroupSelect01">
+											  <option selected>Choose...</option>
+											  <option value="1">One</option>
+											  <option value="2">Two</option>
+											  <option value="3">Three</option>
+											</select>
+										</div>
+									</div>
+									<div class="ml-lg-5 col-md-12 mt-3">
+										<div class="form-group">
+											<label class="label" for="#">Body</label>
+											<textarea name="message" class="form-control" id="message" cols="30" rows="4" placeholder="Message"></textarea>
+										</div>
+									</div>
+									<div class="input-group col-md-12 mb-3 mt-3 ml-lg-5">
+										<div class="form-group">
+											<label class="label">Thumbnail</label>
+											<input type="file" class="form-control">
+										</div>
+									  </div> -->
+									  <div class="col-md-12 pt-3">
+										<div class="form-group">
+											<input type="submit" value="Upload Blog" class="btn btn-grey">
+											<div class="submitting"></div>
+										</div>
+									</div>
+								</div>
+							</form>
+							<!-- Form end -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

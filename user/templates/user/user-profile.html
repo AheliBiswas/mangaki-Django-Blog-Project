@@ -1,0 +1,156 @@
+{% extends 'main.html' %}
+
+{% block content %}
+  {% load static %}
+
+  <section class="section-padding">
+    <section class="">
+      
+      <div class="container pt-1">
+        <div class="row justify-content-md-center">
+          <div class="col-md-auto">
+                <!-- Alert tags -->
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert {{message.tags}}" role="alert">
+                  <button type="button" class="close pl-2" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+                  {{ message }}
+                </div>
+                {% endfor %}
+              {% endif %}
+            </div>
+        </div>
+      </div>
+
+        <div class="container py-5 h-100 section-padding">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+              <div class="col col-lg-9 col-xl-7">
+                <div class="card">
+                  <div class="rounded-top text-white d-flex flex-row" style="background-color: #996D56;">
+                    <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+                      <img src="{{userprofile.profile_image.url}}"
+                        alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+                        style="width: 150px; z-index: 1; height: 150px;">
+                    </div>
+                    <div class="ms-3" style="margin-top: 145px;">
+                      <h3 class="text-capitalize">{{userprofile.name}}</h3>
+                      <h5 class="mb-3" style="color: whitesmoke;">@{{userprofile.username}}</h5>
+                    </div>
+                    {% if request.user.is_authenticated %}
+                    <div class="sidebar-widget follow mb-5 text-center" style="margin-top: 150px; margin-left: 250px;">
+                        <div class="follow-socials">
+                            <a href="{{userprofile.social_twitter}}"><i class="ti-twitter"></i></a>
+                            <a href="{{userprofile.social_instagram}}"><i class="ti-instagram"></i></a>
+                            <a href="{{userprofile.social_youtube}}"><i class="ti-youtube"></i></a>
+                        </div>
+                    </div>
+                    {% endif %}
+                  </div>
+                  
+                  <div class="p-4 text-black" style="background-color: #f8f9fa;">
+                      <div class="row">
+                        {% if request.user == userprofile.user %}
+                          <div class="col-md-2 pt-3">
+                            <a href="{% url 'update-profile' %}">
+                              <button type="button" class="btn btn-primary mr-1">Update</button>
+                            </a>
+                          </div>
+                          <div class="col-md-2 pt-3">
+                            <a href="{% url 'settings' userprofile.id %}">
+                            <button type="button" class="btn btn-outline-primary" style="border-color: #ce8460;">Settings</button></a>
+                          </div>
+                          {% else %}
+                          <div class="col-md-2 pt-3">
+                              {% if follow %}
+                              <form action="{% url 'follow-unfollow' %}" method="POST">
+                                  {% csrf_token %}
+                                  <input type="hidden" name="pk" value="{{userprofile.id}}"/>
+                                  <button type="submit" class="btn btn-primary mr-1">
+                                    Unfollow</button>
+                              </form>
+    
+                              {% else %}
+                              <form action="{% url 'follow-unfollow' %}" method="POST">
+                                  {% csrf_token %}
+                                  <input type="hidden" name="pk" value="{{userprofile.id}}">
+                                  <button type="submit" class="btn btn-primary mr-1">
+                                    Follow</button>
+                              {% endif %}
+                            </div>
+                            <div class="col-md-2 pt-3 pl-4">
+                              <a href="">
+                                <button type="submit" class="btn btn-outline-primary" style="border-color: #ce8460;" onclick="sendEmail();">Email Me</button>
+                              </a>
+                            </div>
+                          {% endif %}
+                          <div class="d-flex justify-content-end text-center py-1 col-md-8">
+                              <div>
+                              <p class="mb-1 h5 text-color">{{userblogs.count}}</p>
+                              <p class="small mb-0">Blogs</p>
+                              </div>
+                              <div class="px-3">
+                              <p class="mb-1 h5 text-color">{{followers}}</p>
+                              <p class="small mb-0">Followers</p>
+                              </div>
+                              <div>
+                              <p class="mb-1 h5 text-color">{{userprofile.following.all.count}}</p>
+                              <p class="small mb-0">Following</p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="card-body p-4 text-black">
+                    <div class="mb-5">
+                      <h4 class="lead fw-normal mb-1 text-color">About</h4>
+                      <div class="p-4" style="background-color: #f8f9fa;">
+                        <p class="font-italic mb-1">{{userprofile.bio}}</p>
+                      </div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                      <p class="lead fw-normal mb-0">Recent blogs</p>
+                      <p class="mb-0"><a href="{% url 'user-blogs' userprofile.id %}?q={{userprofile.name}}" class="text-muted">Show all</a></p>
+                    </div>
+                    <div class="container">
+                      <div class="row">
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                              <div class="row">
+                                {% for blog in userblogs %}
+                                  <div class="col-lg-4 col-md-6 col-sm-6">
+                                      <article class="post-grid mb-5 ">
+                                          <a class="post-thumb mb-4 d-block" href="{% url 'read-blog' blog.id %}">
+                                              <img src="{{blog.blog_image.url}}" alt="" class="img-fluid w-100">
+                                          </a>
+          
+                                          <div class="post-content-grid">
+                                              <div class="label-date">
+                                                  <span class="day">{{blog.created|date:"d"}}</span>
+                                                  <span class="month text-uppercase">{{blog.created|date:"M"}}</span>
+                                              </div>
+                                              <span
+                                                  class="cat-name text-color font-extra font-lg text-uppercase letter-spacing">{{blog.blog_genre}}</span>
+                                              <h3 class="post-title mt-1"><a href="{% url 'read-blog' blog.id %}">{{blog.title}}
+                                                      </a></h3>
+                                              {% for tag in blog.tag.all %}
+                                                <a href="{% url 'home' %}?search_item={{tag.name}}"><span class="border:1px solid grey btn-dark btn-sm">#{{tag}}</span></a>
+                                              {% endfor %}
+                                              <a href="{% url 'read-blog' blog.id %}" class="btn btn-grey mt-3"> read more</a>
+                                          </div>
+                                      </article>
+                                  </div>
+                                {% empty %}
+                                <p style="color: gray; text-align: center;">No recent blogs</p>
+                                {% endfor %}
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+  </section>
+{% endblock %}

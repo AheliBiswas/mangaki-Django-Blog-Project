@@ -1,0 +1,53 @@
+{% extends 'login-register-main.html' %}
+{% block content %}
+    {% load static %}
+<div class="main">
+      <!-- Sing in  Form -->
+      <section class="sign-in">
+                  <div class="container">
+                      <div class="signin-content">
+                          <div class="signin-image">
+                              <figure><img src="{% static 'login-register-comps/images/signin-image.jpg' %}" alt="sing up image"></figure>
+                              <a href="{% url 'register' %}" class="signup-image-link">Create an account</a>
+                          </div>
+      
+                          <div class="signin-form">
+                              <h2 class="form-title">Forget Password</h2>
+                              <form method="POST" class="register-form" id="login-form">
+                                  {% csrf_token %}
+                                  
+                                  <div class="container pt-2">
+                                    <div class="row justify-content-md-center">
+                                      <div class="col-md-auto">
+                                            <!-- Alert tags -->
+                                            {% if messages %}
+                                            {% for message in messages %}
+                                            <div class="alert {{message.tags}}" role="alert">
+                                              <button type="button" class="close pl-2" data-dismiss="alert" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                              </button>
+                                              {{ message }}
+                                            </div>
+                                            {% endfor %}
+                                          {% endif %}
+                                        </div>
+                                    </div>
+                                  </div>
+    
+
+                                  <div class="form-group">
+                                    <label for="your_email"><i class="zmdi zmdi-email"></i></label>
+                                    <input type="text" name="text" id="text" placeholder="Enter your registered Email / username"/>
+                                  </div>
+
+                                  <div class="form-group form-button">
+                                      <input type="submit" name="signin" id="signin" class="form-submit" value="Verify"/>
+                                  </div>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+      </section>
+      
+    </div>
+{% endblock %}
