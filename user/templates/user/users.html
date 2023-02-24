@@ -1,9 +1,21 @@
 {% extends 'main.html' %}
 
 {% block content %}
+    <!-- ****** Breadcumb Area Start ****** -->
+    <div class="breadcumb-area" style="background-image: url(/static/img/bg-img/users.jpeg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="bradcumb-title text-center">
+                        <h2>Get To Know Each Other Minna!</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 	<section class="section-padding">
 		<div class="container align-content-center">
-			<div class="ml-lg-3 ml-md-5 col-lg-10 pb-2">
+			<div class="ml-lg-3 ml-md-5 col-lg-10 pb-2 pt-3">
 					<form action="" method="GET" class="input-group rounded col-md-6">
 						<input type="search" name="search_user" value="{{search_user}}" class="form-control rounded" placeholder="Search creaters here" aria-label="Search" aria-describedby="search-addon" />
 						<span class="input-group-text border-0" id="search-addon">
@@ -16,7 +28,9 @@
 			<div class="row">
 				<div class="col-4 pr-5">
 					<div class="contact-wrap p-md-5 p-3 sidebar-widget mb-5">
-						<h4 class="text-center widget-title trending-post text-uppercase">Following</h4>
+						<div class="widget-title">
+                            <h6>Following</h6>
+                        </div>
 						<!-- Following -->
 						{% for profile in followings %}
 						<div class="col-sm p-2">
@@ -39,7 +53,9 @@
 				<!-- End of following -->
 				<div class="col-8">
 					<div class="container pt-5 sidebar-widget mb-5">
-						<h4 class="widget-title trending-post text-uppercase">People you may follow</h4>
+						<div class="widget-title">
+                            <h6>People You May Follow</h6>
+                        </div>
 						<div class="row row-cols-1 row-cols-md-3 g-4">
 							<!-- People you may know -->
 							{% for profile in profiles1 %}

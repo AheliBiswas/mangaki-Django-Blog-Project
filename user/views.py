@@ -98,21 +98,20 @@ def userCheck(request):
     if recover_text:
         recover_email = Profile.objects.filter(email=recover_text).first()
         recover_name = Profile.objects.filter(username=recover_text).first()
-
+    try:
         if recover_email is not None:
             email = recover_email.email
             token = recover_email.id
             passwordConfMail(email,token)
             messages.success(request, 'Verification mail has been send to you')
-        if recover_name is not None:
+        elif recover_name == Profile.objects.get(username=recover_name):
             token = recover_name.id
             email = recover_name.email
             passwordConfMail(email,token)
             messages.success(request, 'Verification mail has been send to you')
 
-        else:
-            messages.error(request,'User does not exists')
-     
+    except Exception as e:
+        print(e)
     return render(request,'user/email_check.html')
 
 
@@ -134,12 +133,13 @@ def passwordConfMail(email, token):
 
 def forget_password(request,token):
     user = Profile.objects.get(id=token)
-    password = request.POST.get('pass')
-    if password:
-        user.user.set_password(password)
-        user.user.save()
-        messages.success(request,'Your password has succefully changed')
-        return redirect('login')
+    if request.method == 'POST':
+        password = request.POST.get('pass')
+        if password:
+            user.user.set_password(password)
+            user.user.save()
+            messages.success(request,'Your password has succefully changed')
+            return redirect('login')
     return render(request,'user/forget_password.html')
 
 

@@ -26,12 +26,12 @@ def trendingblogs(request):
 
 def readBlog(request,pk):
     search_item,blogs,tags = searchQuery(request)
+    blogs = Blog.objects.filter()
     blog = Blog.objects.get(id=pk)
     comments = commentBox(request,blog)
     userprofile = Profile.objects.get(username=blog.creator)
     trending_blogs,profiles = trendingblog(request)
 
-    # comments = blog.comment_set.all()
     # if request.method == 'POST':
     #     Comment.objects.create(
     #         user = request.user,
@@ -40,7 +40,7 @@ def readBlog(request,pk):
     #     )
     #     return redirect('read-blog', pk=blog.id)
 
-    context = {'blog':blog,'comments':comments,'userprofile':userprofile,'tags':tags,'search-item':search_item,'trending_blogs':trending_blogs}
+    context = {'blog':blog,'blogs':blogs,'comments':comments,'userprofile':userprofile,'tags':tags,'search-item':search_item,'trending_blogs':trending_blogs}
     return render(request,'blogs/read-blog.html',context)
 
 @login_required(login_url='login')

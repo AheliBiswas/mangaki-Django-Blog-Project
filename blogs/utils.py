@@ -24,11 +24,12 @@ def searchQuery(request):
 def commentBox(request,blog):
     comments = blog.comment_set.all()
     if request.method == 'POST':
-        Comment.objects.create(
+        message = Comment.objects.create(
             user = request.user,
             blog = blog,
             message = request.POST.get('comment')
         )
+        message.save()
         messages.success(request, 'You have commented successfully ')
         # return redirect('read-blog', pk=blog.id)
 

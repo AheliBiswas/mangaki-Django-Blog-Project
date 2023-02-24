@@ -2,32 +2,24 @@
 {% load static %}
 <html lang="en">
   <head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  
-    <!-- theme meta -->
-    <meta name="theme-name" content="revolve" />
-  
-    <!--Favicon-->
-    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
-  
-    <!-- THEME CSS
-    ================================================== -->
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}">
-    <!-- Themify -->
-    <link rel="stylesheet" href="{% static 'plugins/themify/css/themify-icons.css' %}">
-    <link rel="stylesheet" href="{% static 'plugins/slick-carousel/slick-theme.css' %}">
-    <link rel="stylesheet" href="{% static 'plugins/slick-carousel/slick.css' %}">
-    <!-- Slick Carousel -->
-    <link rel="stylesheet" href="{% static 'plugins/owl-carousel/owl.carousel.min.css' %}">
-    <link rel="stylesheet" href="{% static 'plugins/owl-carousel/owl.theme.default.min.css' %}">
-    <link rel="stylesheet" href="{% static 'plugins/magnific-popup/magnific-popup.css' %}">
-    <!-- manin stylesheet -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title></title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static '\images\logo1.ico' %}">
+
+    <!-- Core Stylesheet -->
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+
+    <!-- Responsive CSS -->
+    <link href="{% static 'css/responsive/responsive.css' %}" rel="stylesheet">
+        <link
       href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css"
       rel="stylesheet" />
 
@@ -100,6 +92,9 @@
               a:hover {
               color: #ce8460;
               }
+      .text-color{
+        color: rgb(252,108,63);
+      }
     </style>
 
     <script type="text/javascript"
@@ -119,83 +114,47 @@
     </script>
   </head>
   <body>
+      <!-- Preloader Start -->
+      <div id="preloader">
+        <div class="yummy-load"></div>
+    </div>
+    
 
     {% include 'navbar.html' %}
     {% block content%}
-    <div id="pre-loader">
-      <img src="{% static 'images/loader.gif' %}" alt="Loading..." />
-      </div>
+
     {% endblock %}
 
-    <section class="footer-2 section-padding gray-bg pb-5">
-      <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-6">
-              <div class="copyright text-center ">
-                @ copyright all reserved to <a href="https://themefisher.com/">themefisher.com</a>-2019 Distribution <a
-                  href="https://themewagon.com">ThemeWagon.</a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+      <!-- ****** Footer Menu Area Start ****** -->
+      <footer class="footer_area">
 
-    <!-- THEME JAVASCRIPT FILES
-    ================================================== -->
-    <!-- initialize jQuery Library -->
-    <script src="{% static 'plugins/jquery/jquery.js' %}"></script>
-    <!-- Bootstrap jQuery -->
-    <script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'plugins/bootstrap/js/popper.min.js' %}"></script>
-    <!-- Owl caeousel -->
-    <script src="{% static 'plugins/owl-carousel/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'plugins/slick-carousel/slick.min.js' %}"></script>
-    <script src="{% static 'plugins/magnific-popup/magnific-popup.js' %}"></script>
-    <!-- Instagram Feed Js -->
-    <script src="{% static 'plugins/instafeed-js/instafeed.min.js' %}"></script>
-    <!-- main js -->
-    <script src="{% static 'js/custom.js' %}"></script>
-    <script src="{% static 'js/new.js' %}"></script>
-    <script
-    type="text/javascript"
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Copywrite Text -->
+                    <div class="copy_right_text text-center">
+                        <p>Copyright @2018 All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ****** Footer Menu Area End ****** -->
+
+    <!-- Jquery-2.2.4 js -->
+    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap-4 js -->
+    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins JS -->
+    <script src="{% static 'js/others/plugins.js' %}"></script>
+    <!-- Active JS -->
+    <script src="{% static 'js/active.js' %}"></script>
+
+    <script type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.js"
     ></script>
-    
-
-    <script>
-
-      (function ($) {
-        console.log('Hello Aheli')
-        // Start of use strict
-        // 'use strict';
-        
-          /*-----------------------------------------
-          1. Preloader Loading ----------------------- 
-          -----------------------------------------*/
-        function pre_loader(){
-          $("#load").fadeOut();
-          $('#pre-loader').delay(0).fadeOut('slow');
-        }
-        pre_loader();
-      })
-        /**
-   * Open and close the search form.
-   */
-        // const searchOpen = document.querySelector('.js-search-open');
-        // const searchClose = document.querySelector('.js-search-close');
-        // const searchWrap = document.querySelector(".js-search-form-wrap");
-
-        // searchOpen.addEventListener("click", (e) => {
-        //   e.preventDefault();
-        //   searchWrap.classList.add("active");
-        // });
-
-        // searchClose.addEventListener("click", (e) => {
-        //   e.preventDefault();
-        //   searchWrap.classList.remove("active");
-        // });
-    </script>
-
   </body>
 </html>

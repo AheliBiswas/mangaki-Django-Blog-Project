@@ -1,5 +1,5 @@
-<div class="col-lg-4">
-    <!-- Trending Post -->
+<!-- <div class="col-lg-4">
+
     <div class="sidebar-widget mb-5 container">
         <h4 class="text-center widget-title trending-post">Trending Posts</h4>
         {% for blog in trending_blogs %}
@@ -14,4 +14,31 @@
         </div>
     {% endfor %}
         <a class="cat-name text-color font-sm font-extra text-uppercase letter-spacing" href="{% url 'trending-blog' %}">More ></a>
+    </div>
+</div> -->
+
+
+<!-- Single Widget Area -->
+    <div class="single-widget-area popular-post-widget">
+        <div class="widget-title text-center">
+            <h6>Populer Post</h6>
+        </div>
+        {% for blog in trending_blogs %}
+        <!-- Single Popular Post -->
+        <div class="single-populer-post d-flex media border-bottom py-3 sidebar-post-item">
+            <img src="{{blog.blog_image.url}}" alt="" href="{% url 'read-blog' blog.id %}">
+            <div class="post-content">
+                <span class="cat-name text-color font-sm font-extra text-uppercase letter-spacing">{{blog.blog_genre}}</span>
+                <a href="{% url 'read-blog' blog.id %}">
+                    <h6 class="post-headline">{{blog.title}}</h6>
+                </a>
+                <p class="author">by {{blog.creator}} </p>
+                <!-- Post Comments -->
+                <div class="post-comments">
+                    <a href="{% url 'read-blog' blog.id %}"><i class="fa fa-comment-o" aria-hidden="true"></i> {{blog.comment_set.count}} comments</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <a class="cat-name text-color font-sm font-extra text-uppercase letter-spacing pt-3" href="{% url 'trending-blog' %}">More   <i class="fa fa-arrow-right" aria-hidden="true"></i></i></a>
     </div>

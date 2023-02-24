@@ -16,7 +16,7 @@ urlpatterns = [
     path('user-profile/settings/<str:pk>/', views.userSettings,name='settings'),
 
     path('follow-unfollow/',views.follow_unfollow_account,name='follow-unfollow'),
-    path('blog-users/user-account/<str:pk>/',views.userAccount, name='user-account'),
+    path('user-account/<str:pk>/',views.userAccount, name='user-account'),
     path('blogs-by/<str:pk>/', views.userBlogs,name='user-blogs'),
     path('delete-profile/<str:pk>/', views.deleteProfile, name='delete-profile'),
     path('contact/', views.contact, name='contact'),

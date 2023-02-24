@@ -1,7 +1,14 @@
 {% extends 'main.html' %}
 {% block content %} 
 	{% load static %}
-	
+
+
+	<!-- Top Slider -->
+	  {% include 'blogs/top_slider.html' %}
+	<!-- End of top slider -->
+    <!-- ****** Categories Area Start ****** -->
+    <section class="categories_area clearfix" id="about">
+        	
       <div class="container pt-2">
         <div class="row justify-content-md-center">
           <div class="col-md-auto">
@@ -19,96 +26,129 @@
             </div>
         </div>
       </div>
-
-	<!-- Top Slider -->
-	  {% include 'blogs/top_slider.html' %}
-	<!-- End of top slider -->
-	<section class="section-padding">
-		<!-- Filters -->
-		<div class="row">
-			<h4 class="text-center widget-title trending-post">Filter by tags</h4>
-			{% for tag in tags %}
-			<div class="col p-3">
-				<a href="{% url 'home' %}?search_item={{tag.name}}" type="submit" class="btn btn-dark btn-sm btn-rounded text-capitalize">#{{tag}}</a>
-			</div>
-			{% endfor %}
-			
-		<!-- <div class="container"> -->
-			<div class="row p-lg-5">
-			{% if page == "trending_blog" %}
-				<div class="col-lg-8">
-					<div class="row">
-						<!-- Blog Posts -->
-						{% for blog in trending_blogs %}
-						<div class="col-lg-3 col-md-6">
-							<article class="post-grid mb-5">
-								<a class="post-thumb mb-4 d-block" href="{% url 'read-blog' blog.id %}">
-									<img src="{{blog.blog_image.url}}" alt="" class="img-fluid w-100">
-								</a>
-									<span class="cat-name text-color font-extra text-lg text-uppercase letter-spacing-1 mr-lg-5">{{blog.blog_genre}}</span>
-									<p class="text-muted font-md" style="padding: 0; font-size:13px;"><i class="ti-time mr-2"></i>{{blog.created|timesince}}</p>
-								<h3 class="post-title mt-1"><a href="{% url 'read-blog' blog.id %}">{{blog.title}}</a></h3>
-								{% for tag in blog.tag.all %}
-								<a href="{% url 'home' %}?search_item={{tag.name}}"><span class="border:1px solid grey btn-dark btn-sm">#{{tag}}</span></a>
-							  	{% endfor %}
-								<p class="author" style="padding: 0; font-style: italic;">by @{{blog.creator}}</p>
-								<span><a class="cat-name text-color font-md font-extra" href="{% url 'read-blog' blog.id %}"> Read More ></a></span>
-							</article>
-						</div>
-						{% endfor %}
-
-						<!-- End of blog posts -->
-					</div>
-				</div>
-				{% else %}
-				<div class="col-lg-8">
-					<div class="row">
-						<!-- Blog Posts -->
+      
+        <div class="container">
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-12 col-md-6 col-lg-2">
+                    <div class="single_catagory wow fadeInUp" data-wow-delay=".3s">
+                        <img src="/static/img/catagory-img/1.jpeg" alt="">
+                        <div class="catagory-title" style="width: 130px; height: 50px;">
+                            <a href="{% url 'anime-blog' %}">
+                                <h5>Anime</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-2">
+                    <div class="single_catagory wow fadeInUp" data-wow-delay=".6s">
+                        <img src="/static/img/catagory-img/2.jpeg" alt="">
+                        <div class="catagory-title" style="width: 130px; height: 50px;">
+                            <a href="{% url 'manga-blog' %}">
+                                <h5>Manga</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-2">
+                    <div class="single_catagory wow fadeInUp" data-wow-delay=".9s">
+                        <img src="/static/img/catagory-img/3.jpg" alt="">
+                        <div class="catagory-title" style="width: 130px; height: 50px;">
+                            <a href="{% url 'webtoon-blog' %}">
+                                <h5>Webtoon</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+				<div class="col-12 col-md-6 col-lg-2">
+                    <div class="single_catagory wow fadeInUp" data-wow-delay=".9s">
+                        <img src="/static/img/catagory-img/4.jpeg" alt="">
+                        <div class="catagory-title" style="width: 130px; height: 50px;">
+                            <a href="{% url 'manhwa-blog' %}">
+                                <h5>Manhwa</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+				<div class="col-12 col-md-6 col-lg-2">
+                    <div class="single_catagory wow fadeInUp" data-wow-delay=".9s">
+                        <img src="/static/img/catagory-img/5.jpeg" alt="">
+                        <div class="catagory-title" style="width: 130px; height: 50px;">
+                            <a href="{% url 'manhua-blog' %}">
+                                <h5>Manhua</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div>
+    </section>
+    <!-- ****** Categories Area End ****** -->
+    <!-- ****** Blog Area Start ****** -->
+    <section class="blog_area section_padding_0_80">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="row">
+						<!-- Single Post -->
 						{% for blog in blogs %}
-						<div class="col-lg-3 col-md-6">
-							<article class="post-grid mb-5">
-								<a class="post-thumb mb-4 d-block" href="{% url 'read-blog' blog.id %}">
-									<img src="{{blog.blog_image.url}}" alt="" class="img-fluid w-100">
-								</a>
+						<div class="col-12 col-md-6">
+							<div class="single-post wow fadeInUp" data-wow-delay=".4s">
+								<!-- Post Thumb -->
+								<div class="post-thumb">
+									<a class="post-thumb mb-4 d-block" href="{% url 'read-blog' blog.id %}">
+									<img src="{{blog.blog_image.url}}" alt=""></a>
+								</div>
+								<!-- Post Content -->
+								<div class="post-content">
+									<div class="post-meta d-flex">
+										<div class="post-author-date-area d-flex">
+											<!-- Post Author -->
+											<div class="post-author">
+												<a href="#">By @{{blog.creator}}</a>
+											</div>
+											<!-- Post Date -->
+											<div class="post-date">
+												<a href="#">{{blog.created|timesince}}</a>
+											</div>
+										</div>
+										<!-- Post Comment & Share Area -->
+										<div class="post-comment-share-area d-flex">
+											<!-- Post Comments -->
+											<div class="post-comments">
+												<a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i> {{blog.comment_set.count}}</a>
+											</div>
+										</div>
+									</div>
 									<span class="cat-name text-color font-extra text-sm text-uppercase letter-spacing-1 mr-lg-5">{{blog.blog_genre}}</span>
-									<p class="text-muted font-md " style="padding: 0; font-size:13px;"><i class="ti-time mr-2"></i>{{blog.created|timesince}}</p>
-								<h3 class="post-title mt-1"><a href="{% url 'read-blog' blog.id %}">{{blog.title}}</a></h3>
-								{% for tag in blog.tag.all %}
-								<a href="{% url 'home' %}?search_item={{tag.name}}"><span class="border:1px solid grey btn-dark btn-sm">#{{tag}}</span></a>
-							  	{% endfor %}
-								<p class="author pt-3" style="padding: 0; font-style: italic;">by @{{blog.creator}}</p>
-								<span><a class="cat-name text-color font-md font-extra" href="{% url 'read-blog' blog.id %}"> Read More ></a></span>
-							</article>
+									<a href="{% url 'read-blog' blog.id %}">
+										<h4 class="post-headline">{{blog.title}}</h4>
+									</a>
+									{% for tag in blog.tag.all %}
+									<a href="{% url 'home' %}?search_item={{tag.name}}"><span class="border:1px solid grey btn-dark btn-sm">#{{tag}}</span></a>
+									  {% endfor %}
+									<div class="pt-3">
+										<a href="{% url 'read-blog' blog.id %}" class="btn btn-black btn-md">Read More</a>
+									</div>
+								</div>
+							</div>
 						</div>
 						{% endfor %}
-
-						<!-- End of blog posts -->
 					</div>
 				</div>
-				{% endif %}
-				<!-- Trending Section -->
-					{% include 'blogs/trending_blog_component.html' %}
+				<!-- ****** Blog Sidebar ****** -->
+				<div class="col-12 col-sm-8 col-md-6 col-lg-4">
+					<div class="blog-sidebar mt-5 mt-lg-0">
+					<!-- Trending Section -->
+						{% include 'blogs/trending_blog_component.html' %}
 					<!-- People you many know -->
-					{% include 'blogs/people-you-may-know-component.html' %}
-
-
-				</div> 
-				<!-- End Trending Section -->
-
-				<!-- Pagination -->
-				<!-- <div class="m-auto">
-					<div class="pagination mt-5 pt-4">
-						<ul class="list-inline ">
-							<li class="list-inline-item"><a href="#" class="active">1</a></li>
-							<li class="list-inline-item"><a href="#">2</a></li>
-							<li class="list-inline-item"><a href="#">3</a></li>
-							<li class="list-inline-item"><a href="#" class="prev-posts"><i class="ti-arrow-right"></i></a></li>
-						</ul>
+						{% include 'blogs/people-you-may-know-component.html' %}
 					</div>
-				</div> -->
-				<!-- End of Pagination -->
+				</div>
 			</div>
-		<!-- </div> -->
+		</div>
+
 	</section>
 
 {% endblock %}
