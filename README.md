@@ -50,12 +50,12 @@
 
 ### Built With
 <p>
-1.Django Framework
-2.Sqllite3
-3.Html
-4.CSS
-5.JS
-</p>
+1.Django Framework</p>
+<p>2.Sqllite3</p>
+<p>3.Html</p>
+<p>4.CSS</p>
+<p>5.JS</p>
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
