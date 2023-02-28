@@ -26,7 +26,7 @@
 <br />
 <div align="center">
   <a href="">
-    <img src="doc_image/logo.jpg" alt="Logo" width="80" height="80">
+    <img src="doc_image/logo.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">Mangaki - Django Comic Blog Project</h3>
@@ -49,7 +49,13 @@
 <p><a href="https://themewagon.com/themes/free-html5-food-blog-website-template-yummy/"> Theme Wagon: Yummy – Free HTML5 food blog website template</a>  </p>
 
 ### Built With
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=ahelibiswas)](https://github.com/ahelibiswas/github-readme-stats)
+<p>
+1.Django Framework
+2.Sqllite3
+3.Html
+4.CSS
+5.JS
+</p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -64,12 +70,12 @@ To set up my project locally
 
 --> Clone the repository using the command below :
   ```sh
- git clone https://github.com/AheliBiswas/meme-land-Django-Project.git
+ git clone https://github.com/AheliBiswas/mangaki-Django-Blog-Project.git
   ```
 
 --> Move into the directory where we have the project files :
    ```sh
-   cd image_upload
+   cd animeblog
    ```
 --> Create a virtual environment :
    ```sh

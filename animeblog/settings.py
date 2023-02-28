@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('Anime_Blog_Secret_Key')
+SECRET_KEY = '2rkka_z)u$g6^8=v0f3-l_tk(if9s%xh89nc*((x6fblt7xnsz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
